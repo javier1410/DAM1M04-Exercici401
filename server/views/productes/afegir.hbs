@@ -1,0 +1,39 @@
+<h2>Afegir producte</h2>
+
+<form action="/create" method="POST" onsubmit="return validarProducte()">
+  <input type="hidden" name="taula" value="productes">
+
+  <p>
+    <label>Nom</label><br>
+    <input type="text" name="name" id="name">
+    <br><span class="error-text" id="errorName"></span>
+  </p>
+
+  <p>
+    <label>Categoria</label><br>
+    <input type="text" name="category" id="category">
+    <br><span class="error-text" id="errorCategory"></span>
+  </p>
+
+  <p>
+    <label>Preu</label><br>
+    <input type="number" step="0.01" name="price" id="price">
+    <br><span class="error-text" id="errorPrice"></span>
+  </p>
+
+  <p>
+    <label>Stock</label><br>
+    <input type="number" name="stock" id="stock">
+    <br><span class="error-text" id="errorStock"></span>
+  </p>
+
+  <p>
+    <label>Actiu</label><br>
+    <select name="active" id="active">
+      <option value="1">Sí</option>
+      <option value="0">No</option>
+    </select>
+  </p>
+
+  <button type="submit">Guardar</button>
+</form>

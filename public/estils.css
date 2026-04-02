@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+/* HEADER / MENU / FOOTER */
+.header, .menu, .footer {
+  padding: 15px;
+  background: #ffffff;
+  border-bottom: 1px solid #ccc;
+}
+
+/* CONTENIDO */
+.contenidor {
+  padding: 20px;
+}
+
+/* MENU */
+.menu a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #2d6cdf;
+}
+
+/* TABLAS */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+/* CARDS */
+.card {
+  background: #ffffff;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+/* BOTONES */
+button, .boto {
+  background: #2d6cdf;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* STOCK COLORS */
+.stock-ok {
+  background: #d1e7dd;
+}
+
+.stock-baix {
+  background: #ffe5b4;
+}
+
+.stock-critic {
+  background: #f8d7da;
+}
+
+/* ERRORES */
+.error-text {
+  color: red;
+  font-size: 12px;
+}
+
+.input-error {
+  border: 2px solid red;
+}
