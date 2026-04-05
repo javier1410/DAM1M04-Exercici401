@@ -1,0 +1,122 @@
+<div class="page-header">
+  <h1>📊 Panell de control</h1>
+</div>
+
+<!-- Pestanyes -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="mostraTab('kpi', this)">KPI</button>
+  <button class="tab-btn" onclick="mostraTab('llistats', this)">Llistats</button>
+</div>
+
+<!-- TAB KPI -->
+<div id="tab-kpi" class="tab-content">
+  <div class="tab-actions">
+    <button class="btn-toggle" id="btnCompacte" onclick="toggleCompacte()">🔲 Mode compacte</button>
+  </div>
+
+  <div id="kpi-grid" class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Vendes avui</div>
+      <div class="kpi-valor">{{vendesToday}} €</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Vendes del mes</div>
+      <div class="kpi-valor">{{vendesMonth}} €</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Comandes avui</div>
+      <div class="kpi-valor">{{comandesToday}}</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Comandes del mes</div>
+      <div class="kpi-valor">{{comandesMonth}}</div>
+    </div>
+    <div class="kpi-card kpi-wide">
+      <div class="kpi-label">⚠️ Productes amb stock baix (&lt;5)</div>
+      {{#if lowStock.length}}
+        <ul class="kpi-list">
+          {{#each lowStock}}
+            <li><strong>{{name}}</strong> — {{stock}} unitats</li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <p class="text-ok">✅ Tot el stock és correcte</p>
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+<!-- TAB LLISTATS -->
+<div id="tab-llistats" class="tab-content hidden">
+  <div class="tab-actions">
+    <button class="btn-toggle" id="btnColors" onclick="toggleColors()">🎨 Colors stock</button>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2>🕐 Últimes 5 vendes</h2>
+      <table class="taula">
+        <thead>
+          <tr><th>Data</th><th>Client</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          {{#each lastSales}}
+          <tr>
+            <td>{{formatDate sale_date}}</td>
+            <td>{{client}}</td>
+            <td>{{toFixed2 total}} €</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>🏆 Top 5 productes</h2>
+      <table class="taula" id="topProductesTable">
+        <thead>
+          <tr><th>Producte</th><th>Unitats venudes</th></tr>
+        </thead>
+        <tbody>
+          {{#each topProducts}}
+          <tr>
+            <td>{{name}}</td>
+            <td data-stock="{{vendes}}">{{vendes}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+function mostraTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.remove('hidden');
+  btn.classList.add('active');
+}
+
+function toggleCompacte() {
+  const grid = document.getElementById('kpi-grid');
+  const btn = document.getElementById('btnCompacte');
+  grid.classList.toggle('kpi-compacte');
+  btn.textContent = grid.classList.contains('kpi-compacte') ? '🔲 Mode complet' : '🔲 Mode compacte';
+}
+
+let colorsActius = false;
+function toggleColors() {
+  colorsActius = !colorsActius;
+  const btn = document.getElementById('btnColors');
+  btn.textContent = colorsActius ? '🎨 Desactiva colors' : '🎨 Colors stock';
+  document.querySelectorAll('#topProductesTable [data-stock]').forEach(td => {
+    const v = parseInt(td.dataset.stock);
+    if (colorsActius) {
+      td.className = v >= 10 ? 'stock-ok' : v >= 5 ? 'stock-baix' : 'stock-critic';
+    } else {
+      td.className = '';
+    }
+  });
+}
+</script>

@@ -1,0 +1,47 @@
+<div class="page-header">
+  <h1>👥 Clients</h1>
+  <a href="/clientAfegir" class="btn-primary">+ Afegir client</a>
+</div>
+
+<form class="search-bar" method="GET" action="/clients">
+  <input type="text" name="cerca" value="{{cerca}}" placeholder="Buscar per nom o email..." />
+  <label class="check-inline">
+    <input type="checkbox" name="vip" value="1" {{#if vip}}checked{{/if}} onchange="this.form.submit()" />
+    Només VIP (≥3 compres)
+  </label>
+  <button type="submit">🔍 Buscar</button>
+  {{#if cerca}}<a href="/clients" class="btn-secondary">✖ Netejar</a>{{/if}}
+</form>
+
+<table class="taula">
+  <thead>
+    <tr>
+      <th>Nom</th><th>Email</th><th>Telèfon</th><th>Compres</th><th>Total gastat</th><th>Accions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each clients}}
+    <tr>
+      <td>{{name}} {{#if (gt compres 2)}}<span class="badge-vip">VIP</span>{{/if}}</td>
+      <td>{{email}}</td>
+      <td>{{phone}}</td>
+      <td>{{compres}}</td>
+      <td>{{toFixed2 gastat}} €</td>
+      <td>
+        <a href="/clientFitxa?id={{id}}" class="btn-sm">👁 Fitxa</a>
+        <a href="/clientEditar?id={{id}}" class="btn-sm">✏️ Editar</a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<div class="paginacio">
+  {{#if (gt pagina 0)}}
+    <a href="/clients?pagina={{paginaAnterior}}&cerca={{cerca}}" class="btn-secondary">← Anterior</a>
+  {{/if}}
+  <span>Pàgina {{add pagina 1}} de {{totalPagines}}</span>
+  {{#if paginaSeguent}}
+    <a href="/clients?pagina={{paginaSeguent}}&cerca={{cerca}}" class="btn-secondary">Següent →</a>
+  {{/if}}
+</div>

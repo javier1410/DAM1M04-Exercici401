@@ -23,13 +23,5 @@
     "pm2": "^6.0.14"
   },
   "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/javier1410/DAM1M04-Exercici302.git"
-  },
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/javier1410/DAM1M04-Exercici302/issues"
-  },
-  "homepage": "https://github.com/javier1410/DAM1M04-Exercici302#readme"
+  "type": "commonjs"
 }

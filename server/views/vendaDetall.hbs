@@ -1,0 +1,44 @@
+<div class="page-header">
+  <h1>🛒 Venda #{{venda.id}}</h1>
+  <a href="/vendes" class="btn-secondary">← Tornar</a>
+</div>
+
+<div class="grid-2">
+  <div class="card">
+    <h2>Dades de la venda</h2>
+    <p><strong>Data:</strong> {{formatDate venda.sale_date}}</p>
+    <p><strong>Mètode de pagament:</strong> {{venda.payment_method}}</p>
+    <p><strong>Total:</strong> {{toFixed2 venda.total}} €</p>
+  </div>
+  <div class="card">
+    <h2>Client</h2>
+    <p><strong>Nom:</strong> {{venda.client}}</p>
+    <p><strong>Email:</strong> {{venda.email}}</p>
+    <a href="/clientFitxa?id={{venda.customer_id}}" class="btn-sm">👁 Veure fitxa</a>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Línies de la venda</h2>
+  <table class="taula">
+    <thead>
+      <tr><th>Producte</th><th>Quantitat</th><th>Preu unitari</th><th>Total línia</th></tr>
+    </thead>
+    <tbody>
+      {{#each linies}}
+      <tr>
+        <td>{{producte}}</td>
+        <td>{{qty}}</td>
+        <td>{{toFixed2 unit_price}} €</td>
+        <td>{{toFixed2 line_total}} €</td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3"><strong>Total</strong></td>
+        <td><strong>{{toFixed2 venda.total}} €</strong></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
