@@ -1,0 +1,38 @@
+<h1>👤 Fitxa client</h1>
+
+<div class="card">
+  <h2>{{client.name}}</h2>
+  <p style="margin-top:0.5rem; color:var(--text-muted);">
+    📧 {{client.email}} &nbsp;|&nbsp; 📞 {{client.phone}}
+  </p>
+  <div style="margin-top:1rem;">
+    <a href="/clientEditar?id={{client.id}}" class="btn btn-secondary btn-sm">Editar</a>
+  </div>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden;">
+  <div style="padding:1rem 1.25rem 0.5rem;">
+    <h2>🛒 Últimes compres</h2>
+  </div>
+  {{#if vendes}}
+  <table>
+    <thead>
+      <tr><th>Data</th><th>Producte</th><th>Unitats</th><th>Total</th></tr>
+    </thead>
+    <tbody>
+      {{#each vendes}}
+      <tr>
+        <td>{{sale_date}}</td>
+        <td>{{producte}}</td>
+        <td>{{qty}}</td>
+        <td>{{total}} €</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{else}}
+  <p style="padding:1rem 1.25rem; color:var(--text-muted);">Aquest client no té vendes registrades.</p>
+  {{/if}}
+</div>
+
+<a href="/clients" class="btn btn-secondary">← Tornar a clients</a>

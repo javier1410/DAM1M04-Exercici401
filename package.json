@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "node --watch --watch-path ./server ./server/app.js",
-    "pm2start": "pm2 start ./server/app.js --name app",
+    "dev": "node --watch app.js",
+    "pm2start": "pm2 start ./app.js --name app",
     "pm2stop": "pm2 stop app",
     "pm2restart": "pm2 restart app",
     "pm2delete": "pm2 delete app",

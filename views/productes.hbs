@@ -1,0 +1,54 @@
+<h1>📦 Productes</h1>
+
+<div class="toolbar">
+  <form method="GET" action="/productes" style="display:flex; gap:0.5rem;">
+    <input type="text" name="cerca" placeholder="Cercar per nom o categoria..." value="{{cerca}}">
+    <button type="submit" class="btn btn-primary">Cercar</button>
+    <a href="/productes" class="btn btn-secondary">Netejar</a>
+  </form>
+  <button class="btn btn-toggle" onclick="toggleColors(this)">🎨 Colors stock</button>
+  <a href="/producteAfegir" class="btn btn-primary">+ Afegir producte</a>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden;">
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Categoria</th>
+        <th>Preu</th>
+        <th>Stock</th>
+        <th>Actiu</th>
+        <th>Accions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each productes}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{category}}</td>
+        <td>{{price}} €</td>
+        <td data-stock="{{stock}}">{{stock}}</td>
+        <td>
+          {{#if active}}
+            <span class="badge badge-ok">Sí</span>
+          {{else}}
+            <span class="badge badge-no">No</span>
+          {{/if}}
+        </td>
+        <td><a href="/producteEditar?id={{id}}" class="btn btn-secondary btn-sm">Editar</a></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<div class="paginacio">
+  {{#if hiHaPrev}}
+    <a href="/productes?pagina={{paginaAnt}}&cerca={{cerca}}" class="btn btn-secondary">← Anterior</a>
+  {{/if}}
+  <span style="color:var(--text-muted); font-size:0.85rem;">Pàgina {{pagina}}</span>
+  {{#if hiHaNext}}
+    <a href="/productes?pagina={{paginaSeg}}&cerca={{cerca}}" class="btn btn-secondary">Següent →</a>
+  {{/if}}
+</div>

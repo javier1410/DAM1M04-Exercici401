@@ -1,0 +1,45 @@
+<h1>✏️ Editar client</h1>
+
+<div class="card">
+  <form method="POST" action="/update" onsubmit="validaClient(event)">
+    <input type="hidden" name="table" value="customers">
+    <input type="hidden" name="id" value="{{client.id}}">
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="name">Nom *</label>
+        <input type="text" id="name" name="name" value="{{client.name}}">
+        <span class="missatge-error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" value="{{client.email}}">
+        <span class="missatge-error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Telèfon *</label>
+        <input type="text" id="phone" name="phone" value="{{client.phone}}">
+        <span class="missatge-error"></span>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Guardar canvis</button>
+      <a href="/clients" class="btn btn-secondary">Cancel·lar</a>
+    </div>
+  </form>
+</div>
+
+<!-- Esborrar -->
+<div class="card" style="border-color:var(--danger);">
+  <h2 style="color:var(--danger);">⚠️ Zona de perill</h2>
+  <p style="margin:0.5rem 0 1rem; color:var(--text-muted); font-size:0.9rem;">Aquesta acció no es pot desfer.</p>
+  <form method="POST" action="/delete" onsubmit="return confirm('Segur que vols esborrar aquest client?')">
+    <input type="hidden" name="table" value="customers">
+    <input type="hidden" name="id" value="{{client.id}}">
+    <input type="hidden" name="redirect" value="/clients">
+    <button type="submit" class="btn btn-danger">🗑 Esborrar client</button>
+  </form>
+</div>

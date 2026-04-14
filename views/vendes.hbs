@@ -1,0 +1,40 @@
+<h1>💰 Vendes</h1>
+
+<div class="toolbar">
+  <a href="/vendaAfegir" class="btn btn-primary">+ Nova venda</a>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden;">
+  <table>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Client</th>
+        <th>Producte</th>
+        <th>Unitats</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each vendes}}
+      <tr>
+        <td>{{sale_date}}</td>
+        <td>{{client}}</td>
+        <td>{{producte}}</td>
+        <td>{{qty}}</td>
+        <td>{{total}} €</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<div class="paginacio">
+  {{#if hiHaPrev}}
+    <a href="/vendes?pagina={{paginaAnt}}" class="btn btn-secondary">← Anterior</a>
+  {{/if}}
+  <span style="color:var(--text-muted); font-size:0.85rem;">Pàgina {{pagina}}</span>
+  {{#if hiHaNext}}
+    <a href="/vendes?pagina={{paginaSeg}}" class="btn btn-secondary">Següent →</a>
+  {{/if}}
+</div>

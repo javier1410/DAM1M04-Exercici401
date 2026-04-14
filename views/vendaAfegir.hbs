@@ -1,0 +1,48 @@
+<h1>➕ Nova venda</h1>
+
+<div class="card">
+  <form method="POST" action="/create" onsubmit="validaVenda(event)">
+    <input type="hidden" name="table" value="sales">
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="customer_id">Client *</label>
+        <select id="customer_id" name="customer_id">
+          <option value="">-- Selecciona un client --</option>
+          {{#each clients}}
+          <option value="{{id}}">{{name}}</option>
+          {{/each}}
+        </select>
+        <span class="missatge-error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="product_id">Producte *</label>
+        <select id="product_id" name="product_id">
+          <option value="">-- Selecciona un producte --</option>
+          {{#each productes}}
+          <option value="{{id}}">{{name}} ({{price}} €)</option>
+          {{/each}}
+        </select>
+        <span class="missatge-error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="qty">Quantitat *</label>
+        <input type="number" id="qty" name="qty" min="1" step="1" value="1">
+        <span class="missatge-error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="sale_date">Data *</label>
+        <input type="date" id="sale_date" name="sale_date">
+        <span class="missatge-error"></span>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Registrar venda</button>
+      <a href="/vendes" class="btn btn-secondary">Cancel·lar</a>
+    </div>
+  </form>
+</div>

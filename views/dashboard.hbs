@@ -1,0 +1,76 @@
+<h1>📊 Dashboard</h1>
+
+<div class="tabs">
+  <button class="tab-btn actiu" data-tab="kpi" onclick="canviaTab('kpi')">KPI</button>
+  <button class="tab-btn" data-tab="llistats" onclick="canviaTab('llistats')">Llistats</button>
+</div>
+
+<!-- Tab KPI -->
+<div id="tab-kpi" class="tab-panel visible">
+  <div class="kpi-grid">
+    <div class="kpi-box">
+      <div class="num">{{vendesAvui}}</div>
+      <div class="label">Vendes avui</div>
+    </div>
+    <div class="kpi-box">
+      <div class="num">{{vendesMes}}</div>
+      <div class="label">Vendes del mes</div>
+    </div>
+    <div class="kpi-box">
+      <div class="num">{{stockBaix.length}}</div>
+      <div class="label">Productes stock baix</div>
+    </div>
+  </div>
+
+  {{#if stockBaix}}
+  <div class="card">
+    <h2>⚠️ Productes amb stock baix</h2>
+    <table>
+      <thead><tr><th>Nom</th><th>Categoria</th><th>Stock</th></tr></thead>
+      <tbody>
+        {{#each stockBaix}}
+        <tr>
+          <td>{{name}}</td>
+          <td>{{category}}</td>
+          <td class="stock-critic">{{stock}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{/if}}
+</div>
+
+<!-- Tab Llistats -->
+<div id="tab-llistats" class="tab-panel">
+  <div class="card">
+    <h2>🕐 Últimes 5 vendes</h2>
+    <table>
+      <thead><tr><th>Data</th><th>Client</th><th>Total</th></tr></thead>
+      <tbody>
+        {{#each ultVendes}}
+        <tr>
+          <td>{{sale_date}}</td>
+          <td>{{client}}</td>
+          <td>{{total}} €</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>🏆 Top 5 productes més venuts</h2>
+    <table>
+      <thead><tr><th>Producte</th><th>Unitats venudes</th></tr></thead>
+      <tbody>
+        {{#each topProd}}
+        <tr>
+          <td>{{name}}</td>
+          <td>{{total}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<h1>👥 Clients</h1>
+
+<div class="toolbar">
+  <form method="GET" action="/clients" style="display:flex; gap:0.5rem;">
+    <input type="text" name="cerca" placeholder="Cercar per nom o email..." value="{{cerca}}">
+    <button type="submit" class="btn btn-primary">Cercar</button>
+    <a href="/clients" class="btn btn-secondary">Netejar</a>
+  </form>
+  <a href="/clientAfegir" class="btn btn-primary">+ Afegir client</a>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden;">
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Telèfon</th>
+        <th># Compres</th>
+        <th>Accions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each clients}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{email}}</td>
+        <td>{{phone}}</td>
+        <td>{{numCompres}}</td>
+        <td style="display:flex; gap:0.4rem;">
+          <a href="/clientFitxa?id={{id}}" class="btn btn-secondary btn-sm">Fitxa</a>
+          <a href="/clientEditar?id={{id}}" class="btn btn-secondary btn-sm">Editar</a>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<div class="paginacio">
+  {{#if hiHaPrev}}
+    <a href="/clients?pagina={{paginaAnt}}&cerca={{cerca}}" class="btn btn-secondary">← Anterior</a>
+  {{/if}}
+  <span style="color:var(--text-muted); font-size:0.85rem;">Pàgina {{pagina}}</span>
+  {{#if hiHaNext}}
+    <a href="/clients?pagina={{paginaSeg}}&cerca={{cerca}}" class="btn btn-secondary">Següent →</a>
+  {{/if}}
+</div>
