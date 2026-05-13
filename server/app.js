@@ -324,21 +324,44 @@ app.post('/update', async (req, res) => {
 app.post('/delete', async (req, res) => {
   try {
     const id = parseInt(req.body.id, 10)
+    const table = req.body.table
     const redirect = req.body.redirect || '/productes'
 
     if (Number.isNaN(id)) {
       return res.status(400).send('ID no vàlid')
     }
 
-    await db.query(`
-      DELETE FROM sales
-      WHERE product_id = ${id}
-    `)
+    if (table === 'products') {
+      await db.query(`
+        DELETE FROM sales
+        WHERE product_id = ${id}
+      `)
 
-    await db.query(`
-      DELETE FROM products
-      WHERE id = ${id}
-    `)
+      await db.query(`
+        DELETE FROM products
+        WHERE id = ${id}
+      `)
+
+    } else if (table === 'customers') {
+      await db.query(`
+        DELETE FROM sales
+        WHERE customer_id = ${id}
+      `)
+
+      await db.query(`
+        DELETE FROM customers
+        WHERE id = ${id}
+      `)
+
+    } else if (table === 'sales') {
+      await db.query(`
+        DELETE FROM sales
+        WHERE id = ${id}
+      `)
+
+    } else {
+      return res.status(400).send('Taula no vàlida')
+    }
 
     res.redirect(redirect)
 
