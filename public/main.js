@@ -11,15 +11,7 @@ function canviaTema(tema) {
   localStorage.setItem('tema', tema)
 }
 
-// ── Resaltar enllaç actiu del menú ────────────────────────────
-document.addEventListener('DOMContentLoaded', function () {
-  const path = window.location.pathname
-  document.querySelectorAll('.site-nav a').forEach(function (a) {
-    if (a.getAttribute('href') === path) {
-      a.classList.add('actiu')
-    }
-  })
-})
+
 
 // ── Tabs del dashboard ────────────────────────────────────────
 function canviaTab(nomTab) {
@@ -29,20 +21,7 @@ function canviaTab(nomTab) {
   document.querySelector('[data-tab="' + nomTab + '"]').classList.add('actiu')
 }
 
-// ── Toggle codi colors stock ──────────────────────────────────
-function toggleColors(btn) {
-  btn.classList.toggle('actiu')
-  const actiu = btn.classList.contains('actiu')
-  document.querySelectorAll('[data-stock]').forEach(function (el) {
-    const stock = parseInt(el.getAttribute('data-stock'), 10)
-    el.className = ''
-    if (actiu) {
-      if (stock <= 0)  el.classList.add('stock-critic')
-      else if (stock < 5) el.classList.add('stock-baix')
-      else el.classList.add('stock-ok')
-    }
-  })
-}
+
 
 // ── Validació formulari producte ─────────────────────────────
 function validaProducte(e) {
