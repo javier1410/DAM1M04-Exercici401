@@ -85,7 +85,7 @@ app.get('/', async (req, res) => {
   }
 })
 
-// ─── PRODUCTES ───────────────────────────────────────────────
+// ─── PRODUCTES ──── ─────── ────────────── ─────────── ───────────
 
 app.get('/productes', async (req, res) => {
   try {
@@ -261,7 +261,7 @@ app.get('/vendaAfegir', async (req, res) => {
   }
 })
 
-// ─── CRUD POST ────────────────────────────────────────────────
+// ─── POST ────────────────────────────────────────────────
 
 app.post('/create', async (req, res) => {
   try {
@@ -321,18 +321,30 @@ app.post('/update', async (req, res) => {
     res.status(500).send('Error actualitzant el registre')
   }
 })
-
 app.post('/delete', async (req, res) => {
   try {
-    const table    = req.body.table
-    const id       = parseInt(req.body.id, 10)
-    const redirect = req.body.redirect || '/'
+    const id = parseInt(req.body.id, 10)
+    const redirect = req.body.redirect || '/productes'
 
-    await db.query(`DELETE FROM ${table} WHERE id = ${id}`)
+    if (Number.isNaN(id)) {
+      return res.status(400).send('ID no vàlid')
+    }
+
+    await db.query(`
+      DELETE FROM sales
+      WHERE product_id = ${id}
+    `)
+
+    await db.query(`
+      DELETE FROM products
+      WHERE id = ${id}
+    `)
+
     res.redirect(redirect)
+
   } catch (e) {
-    console.error(e)
-    res.status(500).send('Error esborrant el registre')
+    console.error('ERROR DELETE:', e)
+    res.status(500).send('Error esborrant el registre: ' + e.message)
   }
 })
 

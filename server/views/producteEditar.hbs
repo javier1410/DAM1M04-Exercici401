@@ -48,9 +48,9 @@
 
 <!-- Esborrar -->
 <div class="card" style="border-color:var(--danger);">
-  <h2 style="color:var(--danger);">⚠️ Zona de perill</h2>
+  <h2 style="color:var(--danger);"> Zona de perill</h2>
   <p style="margin:0.5rem 0 1rem; color:var(--text-muted); font-size:0.9rem;">Aquesta acció no es pot desfer.</p>
-  <form method="POST" action="/delete" onsubmit="return confirm('Segur que vols esborrar aquest producte?')">
+  <form method="POST" action="/delete" >
     <input type="hidden" name="table" value="products">
     <input type="hidden" name="id" value="{{producte.id}}">
     <input type="hidden" name="redirect" value="/productes">
